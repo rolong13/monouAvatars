@@ -1,0 +1,7 @@
+{
+  "name": "monouAvatars",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
