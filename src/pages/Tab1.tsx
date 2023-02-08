@@ -2,6 +2,10 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/rea
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab1.css';
 
+import {  AssetCreateForm, AssetCollection  } from '../../src/ui-components';
+
+
+ 
 const Tab1: React.FC = () => {
   return (
     <IonPage>
@@ -11,12 +15,10 @@ const Tab1: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 1</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 1 page" />
+
+
+<AssetCreateForm />
+<AssetCollection />
       </IonContent>
     </IonPage>
   );

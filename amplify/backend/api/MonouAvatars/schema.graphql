@@ -1,0 +1,55 @@
+type Comportamiento @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  assets: [Asset] @manyToMany(relationName: "AssetComportamiento")
+}
+
+type UsuarioAssetSeleccionado @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  assetusuarioID: ID! @index(name: "byAssetUsuario")
+}
+
+type AssetUsuario @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  assetID: ID! @index(name: "byAsset")
+  UsuarioAssetSeleccionados: [UsuarioAssetSeleccionado] @hasMany(indexName: "byAssetUsuario", fields: ["id"])
+}
+
+type TipoAsset @model @auth(rules: [{allow: public}]) {
+  id: ID!
+}
+
+type TipoMorfologia @model @auth(rules: [{allow: public}]) {
+  id: ID!
+}
+
+type AssetTipoMorfologia @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  assets: [Asset] @manyToMany(relationName: "AssetAssetTipoMorfologia")
+}
+
+type AssetFiles @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  assetURL: AWSURL
+  assetID: ID! @index(name: "byAsset")
+}
+
+type AssetsCategorias @model @auth(rules: [{allow: public}]) {
+  id: ID!
+}
+
+type Categorias @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  categoriaNombre: String
+  assets: [Asset] @manyToMany(relationName: "AssetCategorias")
+}
+
+type Asset @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  assetNombre: String
+  AssetFiles: [AssetFiles] @hasMany(indexName: "byAsset", fields: ["id"])
+  Categorias: [Categorias] @manyToMany(relationName: "AssetCategorias")
+  AssetTipoMorfologias: [AssetTipoMorfologia] @manyToMany(relationName: "AssetAssetTipoMorfologia")
+  TipoAsset: TipoAsset @hasOne
+  Comportamientos: [Comportamiento] @manyToMany(relationName: "AssetComportamiento")
+  AssetUsuarios: [AssetUsuario] @hasMany(indexName: "byAsset", fields: ["id"])
+}

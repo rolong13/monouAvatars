@@ -4,11 +4,28 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+//AWS Amplify
+import '@aws-amplify/ui-react/styles.css';
+
+import { Amplify } from 'aws-amplify';
+import {ThemeProvider} from "@aws-amplify/ui-react";
+
+import awsconfig from './aws-exports';
+import studioTheme from './ui-components/studioTheme';
+
+Amplify.configure(awsconfig);
+
+
+
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
+//Amplify
+<ThemeProvider theme={studioTheme}>
     <App />
+</ThemeProvider>
+//Amplify
   </React.StrictMode>
 );
 
